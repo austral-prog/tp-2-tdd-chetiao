@@ -10,6 +10,27 @@ public class PasswordValidator {
         // - At least 1 lowercase letter  
         // - At least 1 number
         // - At least 1 special character (!@#$%^&*()_+-=[]{}|;:,.<>?)
-        return false;
+        public static int add(String numbers) {
+        if (numbers.isEmpty()) {
+            return 0;
+        }
+
+        String normalized = numbers.replace("\n", ",");
+        String[] parts = normalized.split(",");
+
+        int sum = 0;
+        for (String part : parts) {
+            int num = Integer.parseInt(part.trim());
+
+            if (num < 0) {
+                throw new IllegalArgumentException("Número negativo no permitido: " + num);
+            }
+
+            sum += num;
+        }
+
+        return sum;
+    }
+}
     }
 }
