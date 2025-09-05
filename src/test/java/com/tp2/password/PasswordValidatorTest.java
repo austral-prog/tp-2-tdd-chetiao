@@ -5,13 +5,48 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class PasswordValidatorTest {
+public class StringCalculatorTest {
 
-    // TODO: Replace these lines with your tests
     @Test
-    void exampleTest(){
-        assertEquals(4, 2 + 1);
+    void testCadenaVaciaDevuelveCero() {
+        assertEquals(0, StringCalculator.add(""));
     }
+
+    @Test
+    void testUnSoloNumeroDevuelveElMismoNumero() {
+        assertEquals(5, StringCalculator.add("5"));
+    }
+
+    @Test
+    void testDosNumerosSeparadosPorComa() {
+        assertEquals(8, StringCalculator.add("3,5"));
+    }
+
+    @Test
+    void testMultiplesNumerosSeparadosPorComa() {
+        assertEquals(15, StringCalculator.add("1,2,3,4,5"));
+    }
+
+    @Test
+    void testNumerosConSaltosDeLinea() {
+        assertEquals(6, StringCalculator.add("1\n2,3"));
+    }
+
+    @Test
+    void testNumeroNegativoLanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            StringCalculator.add("1,-2,3");
+        });
+    }
+
+    @Test
+    void testMultiplesNumerosNegativosLanzaExcepcion() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            StringCalculator.add("-1,2,-3");
+        });
+        assertEquals("Número negativo no permitido: -1", exception.getMessage());
+    }
+}
 
 //    Missing tests:
 //

@@ -3,13 +3,68 @@ package com.tp2.roman;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class RomanNumeralsTest {
+public class RomanNumeralsTest {
 
-    // TODO: Replace these lines with your tests
     @Test
-    void exampleTest(){
-        assertEquals(4, 2 + 1);
+    void testNumeroUno() {
+        RomanNumerals roman = new RomanNumerals();
+        assertEquals("I", roman.convert(1));
     }
+
+    @Test
+    void testNumeroCinco() {
+        RomanNumerals roman = new RomanNumerals();
+        assertEquals("V", roman.convert(5));
+    }
+
+    @Test
+    void testNumeroDiez() {
+        RomanNumerals roman = new RomanNumerals();
+        assertEquals("X", roman.convert(10));
+    }
+
+    @Test
+    void testNumeroCuatro() {
+        RomanNumerals roman = new RomanNumerals();
+        assertEquals("IV", roman.convert(4));
+    }
+
+    @Test
+    void testNumeroNueve() {
+        RomanNumerals roman = new RomanNumerals();
+        assertEquals("IX", roman.convert(9));
+    }
+
+    @Test
+    void testNumeroComplejo() {
+        RomanNumerals roman = new RomanNumerals();
+        assertEquals("MCMXCIV", roman.convert(1994));
+    }
+
+    @Test
+    void testOtroNumeroComplejo() {
+        RomanNumerals roman = new RomanNumerals();
+        assertEquals("LIV", roman.convert(54));
+    }
+
+    @Test
+    void testNumeroMaximo() {
+        RomanNumerals roman = new RomanNumerals();
+        assertEquals("MMMCMXCIX", roman.convert(3999));
+    }
+
+    @Test
+    void testNumeroCero() {
+        RomanNumerals roman = new RomanNumerals();
+        assertEquals("", roman.convert(0));
+    }
+
+    @Test
+    void testNumeroNegativo() {
+        RomanNumerals roman = new RomanNumerals();
+        assertEquals("", roman.convert(-1));
+    }
+}
 
 //    Missing tests:
 //
