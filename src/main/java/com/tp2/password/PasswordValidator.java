@@ -1,36 +1,36 @@
 package com.tp2.password;
 
 public class PasswordValidator {
-    
+
     public boolean isValid(String password) {
-        // TODO: Implement password validation following TDD approach
-        // Consider these criteria:
-        // - Minimum 8 characters
-        // - At least 1 uppercase letter
-        // - At least 1 lowercase letter  
-        // - At least 1 number
-        // - At least 1 special character (!@#$%^&*()_+-=[]{}|;:,.<>?)
-        public static int add(String numbers) {
-        if (numbers.isEmpty()) {
-            return 0;
-        }
+            if (password.length() < 9) {return false;} // si tiene menos de 8 es invalida
 
-        String normalized = numbers.replace("\n", ",");
-        String[] parts = normalized.split(",");
+            boolean TieneMayus = false;
+            boolean TieneNumero = false;    // string password = "hOla1f$"
+            boolean TieneMinuscula = false;
+            boolean TieneCaracterEspecial = false;
 
-        int sum = 0;
-        for (String part : parts) {
-            int num = Integer.parseInt(part.trim());
 
-            if (num < 0) {
-                throw new IllegalArgumentException("Número negativo no permitido: " + num);
+            for (int i = 0; i < password.length(); i++) {
+                if (Character.isUpperCase(password.charAt(i)))
+                {TieneMayus = true;}
+
+                if (Character.isDigit(password.charAt(i)))
+                {TieneNumero = true;}
+
+                if (Character.isLowerCase(password.charAt(i)))
+                {TieneMinuscula = true;}
+
+                if (!Character.isLetterOrDigit(password.charAt(i)))
+                {TieneCaracterEspecial = true;}
+
             }
 
-            sum += num;
-        }
+            if (TieneMayus && TieneMinuscula && TieneCaracterEspecial // verifico que todo es true
+            && TieneNumero) {
+                return true;
+            }
+            else {return false;}
 
-        return sum;
     }
-}
     }
-}

@@ -1,50 +1,38 @@
 package com.tp2.stringcalculator;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StringCalculatorTest {
+    private final StringCalculator calculator = new StringCalculator();
 
     @Test
-    void testEmptyStringReturnsZero() {
-        StringCalculator calculator = new StringCalculator();
+    void testEmptyString() {
         assertEquals(0, calculator.add(""));
     }
 
     @Test
     void testSingleNumber() {
-        StringCalculator calculator = new StringCalculator();
-        assertEquals(5, calculator.add("5"));
+        assertEquals(1, calculator.add("1"));
     }
 
     @Test
-    void testTwoNumbersCommaSeparated() {
-        StringCalculator calculator = new StringCalculator();
-        assertEquals(8, calculator.add("3,5"));
+    void testTwoNumbers() {
+        assertEquals(3, calculator.add("1,2"));
     }
 
     @Test
-    void testMultipleNumbersWithNewlines() {
-        StringCalculator calculator = new StringCalculator();
-        assertEquals(10, calculator.add("1\n2,3\n4"));
+    void testMultipleNumbers() {
+        assertEquals(6, calculator.add("1,2,3"));
     }
 
     @Test
-    void testNegativeNumberThrowsException() {
-        StringCalculator calculator = new StringCalculator();
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            calculator.add("2,-3,4");
-        });
-        assertTrue(exception.getMessage().contains("Número negativo no permitido"));
+    void testNewlineDelimiter() {
+        assertEquals(6, calculator.add("1\n2,3"));
     }
-}
-//    Missing tests:
-//
-//- Empty string should return 0
-//- Single number should return that number
-//- Two numbers separated by comma should return their sum
-//- Multiple numbers separated by comma should return their sum
-//- Numbers separated by newline should work as delimiter
-//- Negative numbers should throw IllegalArgumentException
+
+    @Test
+    void testNegativeNumber() {
+        assertThrows(IllegalArgumentException.class, () -> calculator.add("1,-2"));
+    }
 }

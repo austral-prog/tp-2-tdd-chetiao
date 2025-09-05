@@ -1,60 +1,38 @@
 package com.tp2.password;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class StringCalculatorTest {
+public class PasswordValidatorTest {
+    private final PasswordValidator validator = new PasswordValidator();
 
     @Test
-    void testCadenaVaciaDevuelveCero() {
-        assertEquals(0, StringCalculator.add(""));
+    void testTooShort() {
+        assertFalse(validator.isValid("abc"));
     }
 
     @Test
-    void testUnSoloNumeroDevuelveElMismoNumero() {
-        assertEquals(5, StringCalculator.add("5"));
+    void testMissingUppercase() {
+        assertFalse(validator.isValid("abcdefgh1!"));
     }
 
     @Test
-    void testDosNumerosSeparadosPorComa() {
-        assertEquals(8, StringCalculator.add("3,5"));
+    void testMissingLowercase() {
+        assertFalse(validator.isValid("ABCDEFGH1!"));
     }
 
     @Test
-    void testMultiplesNumerosSeparadosPorComa() {
-        assertEquals(15, StringCalculator.add("1,2,3,4,5"));
+    void testMissingNumber() {
+        assertFalse(validator.isValid("Abcdefgh!"));
     }
 
     @Test
-    void testNumerosConSaltosDeLinea() {
-        assertEquals(6, StringCalculator.add("1\n2,3"));
+    void testMissingSpecialChar() {
+        assertFalse(validator.isValid("Abcdefg1"));
     }
 
     @Test
-    void testNumeroNegativoLanzaExcepcion() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            StringCalculator.add("1,-2,3");
-        });
+    void testValidPassword() {
+        assertTrue(validator.isValid("Abcdefg1!"));
     }
-
-    @Test
-    void testMultiplesNumerosNegativosLanzaExcepcion() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            StringCalculator.add("-1,2,-3");
-        });
-        assertEquals("Número negativo no permitido: -1", exception.getMessage());
-    }
-}
-
-//    Missing tests:
-//
-//- Password with less than 8 characters should be invalid
-//- Password with 8 or more characters should pass length validation
-//- Password without uppercase letter should be invalid
-//- Password without lowercase letter should be invalid
-//- Password without number should be invalid
-//- Password without special character should be invalid
-//- Password meeting all criteria should be valid
 }

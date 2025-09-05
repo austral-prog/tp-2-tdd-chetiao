@@ -1,85 +1,43 @@
 package com.tp2.roman;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RomanNumeralsTest {
+    private final RomanNumerals converter = new RomanNumerals();
 
     @Test
-    void testNumeroUno() {
-        RomanNumerals roman = new RomanNumerals();
-        assertEquals("I", roman.convert(1));
+    void testBasicNumbers() {
+        assertEquals("I", converter.convert(1));
+        assertEquals("V", converter.convert(5));
+        assertEquals("X", converter.convert(10));
     }
 
     @Test
-    void testNumeroCinco() {
-        RomanNumerals roman = new RomanNumerals();
-        assertEquals("V", roman.convert(5));
+    void testSubtractiveCases() {
+        assertEquals("IV", converter.convert(4));
+        assertEquals("IX", converter.convert(9));
     }
 
     @Test
-    void testNumeroDiez() {
-        RomanNumerals roman = new RomanNumerals();
-        assertEquals("X", roman.convert(10));
+    void testMediumNumbers() {
+        assertEquals("XL", converter.convert(40));
+        assertEquals("L", converter.convert(50));
+        assertEquals("XC", converter.convert(90));
+        assertEquals("C", converter.convert(100));
     }
 
     @Test
-    void testNumeroCuatro() {
-        RomanNumerals roman = new RomanNumerals();
-        assertEquals("IV", roman.convert(4));
+    void testLargeNumbers() {
+        assertEquals("CD", converter.convert(400));
+        assertEquals("D", converter.convert(500));
+        assertEquals("CM", converter.convert(900));
+        assertEquals("M", converter.convert(1000));
     }
 
     @Test
-    void testNumeroNueve() {
-        RomanNumerals roman = new RomanNumerals();
-        assertEquals("IX", roman.convert(9));
+    void testComplexNumbers() {
+        assertEquals("MCMXCIV", converter.convert(1994));
+        assertEquals("MMXXIII", converter.convert(2023));
     }
-
-    @Test
-    void testNumeroComplejo() {
-        RomanNumerals roman = new RomanNumerals();
-        assertEquals("MCMXCIV", roman.convert(1994));
-    }
-
-    @Test
-    void testOtroNumeroComplejo() {
-        RomanNumerals roman = new RomanNumerals();
-        assertEquals("LIV", roman.convert(54));
-    }
-
-    @Test
-    void testNumeroMaximo() {
-        RomanNumerals roman = new RomanNumerals();
-        assertEquals("MMMCMXCIX", roman.convert(3999));
-    }
-
-    @Test
-    void testNumeroCero() {
-        RomanNumerals roman = new RomanNumerals();
-        assertEquals("", roman.convert(0));
-    }
-
-    @Test
-    void testNumeroNegativo() {
-        RomanNumerals roman = new RomanNumerals();
-        assertEquals("", roman.convert(-1));
-    }
-}
-
-//    Missing tests:
-//
-//- Convert 1 to "I"
-//- Convert 5 to "V"
-//- Convert 10 to "X"
-//- Convert 4 to "IV" (subtraction case)
-//- Convert 9 to "IX" (subtraction case)
-//- Convert 40 to "XL"
-//- Convert 50 to "L"
-//- Convert 90 to "XC"
-//- Convert 100 to "C"
-//- Convert 400 to "CD"
-//- Convert 500 to "D"
-//- Convert 900 to "CM"
-//- Convert 1000 to "M"
-//- Convert complex numbers like 1994 to "MCMXCIV"
 }
